@@ -11,12 +11,18 @@ class CurrencyConverterController extends Controller
     {
         $requestedCurrency = $this->getRequestedName($request);
         $requestedDate = $this->getRequestedDate($request);
+        $date = $requestedDate;
+
+        if ($this->error) {
+            $requestedDate = null;
+        }
+
         $currency = new Currency($requestedCurrency, $requestedDate);
         $rates = $currency->getRates();
         $error = $this->error;
 
         return $this->view->render($response, 'currency-converter/index.twig', compact(
-            'rates','requestedCurrency', 'requestedDate', 'error'
+            'rates','requestedCurrency', 'date', 'error'
         ));
     }
 
@@ -36,9 +42,9 @@ class CurrencyConverterController extends Controller
 
     private function getRequestedDate($request)
     {
+
         if (isset($request->getQueryParams()['date'])) {
             $requestedDate = $request->getQueryParams()['date'];
-
             $validate = new Validate();
 
             if ($validate->date($requestedDate)) {
@@ -46,14 +52,13 @@ class CurrencyConverterController extends Controller
                     strtotime($requestedDate) > strtotime(date('Y-m-d', time())) ||
                     strtotime($requestedDate) < strtotime(date('Y-m-d', strtotime('1999-01-01')))
                 ) {
-                    $this->error = 'Currency is unavailable for requested date';
+                    $this->error = 'Currency is unavailable for requested date.';
                 }
                 return $requestedDate;
             }
-
         }
-
         return date('Y-m-d', time());
+
     }
 
 

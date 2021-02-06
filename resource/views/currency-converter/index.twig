@@ -4,7 +4,7 @@
 
     <form action="/" method="GET">
         <div class="input-group mb-3 ml-2">
-            <input class="form-control w-50 mr-2" type="date" name="date" value="{{ requestedDate }}" id="example-date-input">
+            <input class="form-control w-50 mr-2" type="date" name="date" value="{{ date }}" id="example-date-input">
             <select class="custom-select" aria-label="Default select example" name="currency">
                 <option>EUR</option>
                 {% for name, value in rates %}
