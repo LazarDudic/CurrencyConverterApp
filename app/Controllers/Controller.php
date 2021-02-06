@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Psr\Container\ContainerInterface;
+use Slim\App;
 
 abstract class Controller
 {

@@ -1,0 +1,36 @@
+{% extends "layouts/app.twig" %}
+
+{% block content %}
+    <form action="/" method="GET">
+    <div class="input-group mb-3 w-50">
+        <select class="form-select" aria-label="Default select example" name="currency">
+            <option>EUR</option>
+            {% for name, value in rates %}
+                <option {{ requestedName == name ? 'selected': '' }} >
+                    {{ name }}
+                </option>
+            {% endfor %}
+        </select>
+        <button class="btn btn-outline-primary" type="submit">Get</button>
+    </div>
+    </form>
+    <table class="table table-dark table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <td>Currency</td>
+            <td>Rate</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for name, value in rates %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ name }}</td>
+                <td>{{ value }}</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}
