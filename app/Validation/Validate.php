@@ -13,4 +13,9 @@ class Validate
     {
         return in_array($currency, $this->currencies);
     }
+
+    public function number($number)
+    {
+        return is_numeric($number);
+    }
 }

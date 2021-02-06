@@ -17,4 +17,9 @@ class Currency
         return $this->rates;
     }
 
+    public function calculate($currency, $amount)
+    {
+        return $this->rates[$currency] * $amount;
+    }
+
 }

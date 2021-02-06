@@ -6,7 +6,7 @@
         <select class="custom-select" aria-label="Default select example" name="currency">
             <option>EUR</option>
             {% for name, value in rates %}
-                <option {{ requestedName == name ? 'selected': '' }} >
+                <option {{ requestedCurrency == name ? 'selected': '' }} >
                     {{ name }}
                 </option>
             {% endfor %}

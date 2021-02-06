@@ -1,0 +1,39 @@
+{% extends "layouts/app.twig" %}
+
+{% block content %}
+    <div class="m-auto">
+        <form action="/calculate" method="GET">
+            <label for="currency">From
+                <select class="custom-select" name="currency" id="currency">
+                    <option selected>{{ requestedCurrency }}</option>
+                    {% for name, value in rates %}
+                        <option >
+                            {{ name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </label>
+            <label for="cover_to">To
+                <select class="custom-select"  name="convert_to" id="covert_to">
+                    <option selected>{{ convertCurrency }}</option>
+                    {% for name, value in rates %}
+                        <option {{ requestedCurrency == name ? 'disable': '' }} >
+                            {{ name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </label>
+            <div class="form-group">
+                <label for="amount"> Amount:</label>
+                <input type="number" class="form-control" name="amount" id="amount" value="{{ amount }}" min="1"/>
+            </div>
+            <div>
+                <button class="btn btn-primary w-50" type="submit">Calculate</button>
+                <a href="/calculate" class="btn btn-warning">Reset</a>
+
+            </div>
+        </form>
+        <h1>Total {{ convertCurrency}} {{ total }}</h1>
+    </div>
+
+{% endblock %}

@@ -9,18 +9,18 @@ class CurrencyConverterController extends Controller
 {
     public function index($request, $response)
     {
-        $requestedName = $this->getRequestedName($request);
+        $requestedCurrency = $this->getRequestedName($request);
 
-        $currency = new Currency($requestedName);
+        $currency = new Currency($requestedCurrency);
         $rates = $currency->getRates();
 
         return $this->view->render($response, 'currency-converter/index.twig', compact(
             'rates',
-                 'requestedName'
+                 'requestedCurrency'
         ));
     }
 
-    private function getRequestedName($request)
+    protected function getRequestedName($request)
     {
         if (isset($request->getQueryParams()['currency'])) {
             $requestedCurrency = $request->getQueryParams()['currency'];
@@ -33,5 +33,7 @@ class CurrencyConverterController extends Controller
 
         return 'EUR';
     }
+
+
 
 }
