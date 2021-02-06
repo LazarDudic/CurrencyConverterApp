@@ -6,9 +6,10 @@ class Currency
 {
     private $rates;
 
-    public function __construct($name)
+    public function __construct($name, $date = null)
     {
-        $url = 'https://api.exchangeratesapi.io/latest?base='.$name;
+        $date = $date ?? date('Y-m-d', time());
+        $url = 'https://api.exchangeratesapi.io/'.$date.'?base='.$name;
         $this->rates = json_decode(file_get_contents($url), true)['rates'];
     }
 

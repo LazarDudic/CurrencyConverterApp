@@ -18,4 +18,9 @@ class Validate
     {
         return is_numeric($number);
     }
+
+    public function date($date)
+    {
+        return boolval(strtotime($date));
+    }
 }

@@ -17,7 +17,7 @@ class CurrencyCalculateController extends CurrencyConverterController
         $rates = $currency->getRates();
         $total = $currency->calculate($convertCurrency, $amount);
 
-        return $this->view->render($response, 'currency-converter/calculate.twig',
+        return $this->view->render($response, 'currency-calculate/index.twig',
             compact('rates', 'total', 'requestedCurrency', 'convertCurrency', 'amount')
         );
     }
