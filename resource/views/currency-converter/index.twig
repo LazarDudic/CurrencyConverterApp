@@ -26,14 +26,17 @@
         </tr>
         </thead>
         <tbody>
+        {% set index = 1 %}
         {% for name, value in rates %}
-            <tr>
-                <th scope="row">{{ loop.index }}</th>
-                <td>{{ name }}</td>
-                <td>{{ value }}</td>
-            </tr>
+            {% if name != requestedCurrency %}
+                <tr>
+                    <th scope="row">{{ index }}</th>
+                    <td>{{ name }}</td>
+                    <td>{{ value }}</td>
+                    {% set index = index + 1 %}
+                </tr>
+            {% endif %}
         {% endfor %}
-
         </tbody>
     </table>
 {% endblock %}
